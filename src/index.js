@@ -18,10 +18,10 @@ const store = createStore(
       thunk.withExtraArgument({
         getFirebase,
         getFirestore,
-      }),
-      reactReduxFirebase(fbConfig),
-      reduxFirestore(fbConfig)
-    )
+      })
+    ),
+    reduxFirestore(fbConfig),
+    reactReduxFirebase(fbConfig)
   )
 );
 

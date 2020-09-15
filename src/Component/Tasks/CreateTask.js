@@ -16,7 +16,6 @@ class CreateTask extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    //console.log(this.state);
     this.props.createTask(this.state);
   };
 
