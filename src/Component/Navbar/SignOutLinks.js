@@ -7,7 +7,7 @@ const SignLink = (fun) => (
       <NavLink to='/'>Home</NavLink>
     </li>
     <li>
-      <NavLink to='/'>Log In</NavLink>
+      <NavLink to='/login'>Log In</NavLink>
     </li>
   </ul>
 );

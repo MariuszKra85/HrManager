@@ -17,9 +17,11 @@ class CreateTask extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.createTask(this.state);
+    this.props.history.push('/');
   };
 
   render() {
+    console.log(this.props);
     return (
       <form className='container row' onSubmit={this.handleSubmit}>
         <div className='input-field col s12 '>

@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import SignInLinks from './SignInLinks';
 import SignOutLinks from './SignOutLinks';
+import { signOut } from '../../Store/Action/authActions';
+import { connect } from 'react-redux';
 
 class Navbar extends Component {
-  state = {
-    ifSignIn: false,
-  };
-
   checkSingIn = () => {
-    if (this.state.ifSignIn) {
-      return <SignInLinks></SignInLinks>;
+    if (this.props.auth) {
+      return (
+        <SignInLinks
+          profile={this.props.profile}
+          logOutFun={() => this.logOut()}
+        ></SignInLinks>
+      );
     } else {
       return <SignOutLinks></SignOutLinks>;
     }
+  };
+
+  logOut = () => {
+    this.props.signOut();
   };
 
   render() {
@@ -22,4 +29,17 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signOut: () => dispatch(signOut()),
+  };
+};
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    auth: state.firebase.auth.uid,
+    profile: state.firebase.profile,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

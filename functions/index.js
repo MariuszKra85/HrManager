@@ -37,6 +37,21 @@ app.delete('/delete', (req, res) => {
     });
 });
 
+app.post('/createUser', (req, res) => {
+  const newUser = {
+    name: req.body.name,
+    surname: req.body.surname,
+    initial: req.body.name[0] + req.body.surname,
+    email: req.body.email,
+    password: req.body.email,
+  };
+
+  db.auth().createUser(newUser.email, newUser.password).then{
+    ((doc) => res.json({message: 'create'}))
+  }
+
+});
+
 exports.createTask = functions.https.onRequest((req, res) => {
   const newTask = {
     name: req.body.name,

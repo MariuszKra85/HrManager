@@ -8,6 +8,10 @@ const TaskReducer = (state = init, action) => {
       return state;
     case 'CREATE_TASK_ERROR':
       console.log('Task not created', action.err);
+      return {
+        ...state,
+        taskError: action.err,
+      };
     default:
       return state;
   }
