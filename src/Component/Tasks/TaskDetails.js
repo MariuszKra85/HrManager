@@ -1,4 +1,3 @@
-import { Divider } from '@material-ui/core';
 import React from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';

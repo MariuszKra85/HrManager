@@ -1,23 +1,28 @@
 import React from 'react';
 import TaskItem from './TaskItem';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { deleteTask } from '../../Store/Action/TaskAction';
 const TasksList = (props) => {
   if (props.tasks) {
-    const task = Object.entries(props.tasks);
+    const tasks = props.tasks;
+    console.log(props);
+    if (tasks.length === 0) {
+      return <div> No Task for Today</div>;
+    }
     return (
       <div>
-        {task &&
-          task.map((task) => {
+        {tasks &&
+          tasks.map((task) => {
             return (
-              <Link to={`/task/${task[0]}`} key={task[0]}>
-                <TaskItem
-                  title={task[1].name}
-                  content={task[1].content}
-                  key={task[1].id}
-                />
-              </Link>
+              <TaskItem
+                title={task.name}
+                content={task.content}
+                key={task.id}
+                id={task.id}
+                deleteFun={props.deleteTask}
+              />
             );
           })}
       </div>
@@ -28,9 +33,19 @@ const TasksList = (props) => {
 };
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
-    tasks: state.firestore.data.tasks,
+    tasks: state.firestore.ordered.tasks,
   };
 };
 
-export default connect(mapStateToProps)(TasksList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteTask: (id) => dispatch(deleteTask(id)),
+  };
+};
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect([{ collection: 'tasks' }])
+)(TasksList);
