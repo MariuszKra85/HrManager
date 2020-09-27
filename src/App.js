@@ -22,7 +22,7 @@ function App() {
           <Route path='/tasks' component={TasksList} />
           <Route path='/newTask' component={CreateTask} />
           <Route path='/newUser' component={CreateNewUser} />
-          <Route path='/userList' component={UsersList} />
+          <Route path='/usersList' component={UsersList} />
         </Switch>
       </div>
     </BrowserRouter>

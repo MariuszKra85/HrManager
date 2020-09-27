@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createUser } from '../../Store/Action/authActions';
+import { Link } from 'react-router-dom';
 
 class CreateNewUser extends Component {
   state = {
@@ -13,6 +14,13 @@ class CreateNewUser extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.createUser(this.state);
+    this.setState = {
+      name: '',
+      surname: '',
+      role: '',
+      email: '',
+    };
+    this.props.history.push('/');
   };
   handleChange = (e) => {
     this.setState({
@@ -73,6 +81,13 @@ class CreateNewUser extends Component {
             Create User
           </button>
         </form>
+        <button
+          className='left btn blue lighten-2 wave waves-light'
+          type='submit'
+          name='submit'
+        >
+          <Link to={'/usersList'}> Show Users List</Link>
+        </button>
       </div>
     );
   }

@@ -54,8 +54,22 @@ export const createUser = (newUser) => {
             surname: newUser.surname,
             initial: newUser.name[0] + newUser.surname[0],
             email: newUser.email,
-            password: newUser.password,
             role: newUser.role,
+          })
+          .then(() => {
+            console.log(res);
+            console.log('tworzymy kolekcje dla admina');
+            return firestore
+              .collection('usersForAdmin')
+              .doc(res.user.uid)
+              .set({
+                name: newUser.name,
+                surname: newUser.surname,
+                initial: newUser.name[0] + newUser.surname[0],
+                email: newUser.email,
+                role: newUser.role,
+                password: newUser.password,
+              });
           })
           .then(() => {
             firebase

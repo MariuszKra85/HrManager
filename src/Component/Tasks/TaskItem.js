@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const StyledButton = styled.button`
   position: relative;
-  top: -5rem;
+  top: -8rem;
   right: 1rem;
   margin: 5px;
   border-radius: 40px;
@@ -12,35 +12,65 @@ const StyledButton = styled.button`
 `;
 
 const TaskItem = ({
+  role,
   title,
   content,
   id,
   deleteFun,
   signInToTask,
+  signOutToTask,
   initials,
 }) => {
-  const dataSignToTask = [id, 'whoIncluded'];
-  console.log(initials);
+  let key = 0;
   return (
     <div key={id}>
       <Link to={`/task/${id}`}>
         <div className='card-panel '>
-          <div>{title}</div>
+          <h4>{title}</h4>
           <div>{content}</div>
-          <div>{initials}</div>
+          {initials &&
+            initials.map((e) => {
+              key++;
+              let item =
+                e &&
+                e.map((e) => {
+                  if (e != null) {
+                    return (
+                      <button
+                        className='btn btn-floating blue lighten-1'
+                        key={key}
+                      >
+                        {e}
+                      </button>
+                    );
+                  } else {
+                    return null;
+                  }
+                });
+              return item;
+            })}
         </div>
       </Link>
-      <StyledButton
-        className='right btn red lighten-2 wave waves-light'
-        onClick={() => deleteFun(id)}
-      >
-        x
-      </StyledButton>
+      {role === 'admin' ? (
+        <StyledButton
+          className='right btn red lighten-2 wave waves-light'
+          onClick={() => deleteFun(id)}
+        >
+          delete Task
+        </StyledButton>
+      ) : (
+        <StyledButton
+          className='right btn red lighten-2 wave waves-light'
+          onClick={() => signOutToTask(id)}
+        >
+          SignOut Task
+        </StyledButton>
+      )}
       <StyledButton
         className='right btn green lighten-2 wave waves-light'
-        onClick={() => signInToTask(dataSignToTask)}
+        onClick={() => signInToTask(id)}
       >
-        v
+        take Task
       </StyledButton>
     </div>
   );

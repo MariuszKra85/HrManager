@@ -3,36 +3,49 @@ import TaskItem from './TaskItem';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { deleteTask, editTask } from '../../Store/Action/TaskAction';
+import {
+  deleteTask,
+  signToTask,
+  signOutTask,
+} from '../../Store/Action/TaskAction';
 const TasksList = (props) => {
   if (props.tasks) {
     const tasks = props.tasks;
     const users = props.users;
+    const user = props.user;
+
     if (tasks.length === 0) {
       return <div> No Task for Today</div>;
     }
-    console.log(props.users);
+
     return (
       <div>
         {tasks &&
           tasks.map((task) => {
             return (
               <TaskItem
+                role={user ? user.role : null}
                 title={task.name}
                 content={task.content}
                 key={task.id}
                 id={task.id}
                 deleteFun={props.deleteTask}
-                signInToTask={props.editTask}
+                signInToTask={props.signToTask}
+                signOutToTask={props.signOutTask}
                 whoIncluded={task.whoIncluded}
                 initials={
-                  users &&
-                  users.map((user) => {
-                    if (user.id === task.whoIncluded) {
-                      return user.initial;
-                    } else {
-                      return null;
-                    }
+                  task.whoIncluded &&
+                  task.whoIncluded.map((taskID) => {
+                    let initials =
+                      users &&
+                      users.map((user) => {
+                        if (user.id === taskID) {
+                          return user.initial;
+                        } else {
+                          return null;
+                        }
+                      });
+                    return initials;
                   })
                 }
               />
@@ -46,8 +59,8 @@ const TasksList = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
+    user: state.firebase.profile,
     tasks: state.firestore.ordered.tasks,
     users: state.firestore.ordered.users,
   };
@@ -56,7 +69,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteTask: (id) => dispatch(deleteTask(id)),
-    editTask: (data) => dispatch(editTask(data)),
+    signToTask: (id) => dispatch(signToTask(id)),
+    signOutTask: (id) => dispatch(signOutTask(id)),
   };
 };
 
