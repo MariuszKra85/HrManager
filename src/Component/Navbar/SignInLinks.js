@@ -4,9 +4,14 @@ import { NavLink } from 'react-router-dom';
 const adminCheck = (admin) => {
   if (admin === 'admin') {
     return (
-      <li>
-        <NavLink to='/newUser'>New User</NavLink>
-      </li>
+      <>
+        <li>
+          <NavLink to='/newUser'>New User</NavLink>
+        </li>{' '}
+        <li>
+          <NavLink to='/tasksDone'>Task Done</NavLink>
+        </li>
+      </>
     );
   } else {
     return null;
@@ -26,6 +31,10 @@ const SignLink = ({ profile, logOutFun }) => {
       <li>
         <NavLink to='/tasks'>Tasks</NavLink>
       </li>
+      <li>
+        <NavLink to='/myTasks'>My Tasks</NavLink>
+      </li>
+
       <li>
         <NavLink to='/login' onClick={logOutFun}>
           Log Out

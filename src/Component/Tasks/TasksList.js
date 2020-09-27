@@ -29,9 +29,9 @@ const TasksList = (props) => {
                 content={task.content}
                 key={task.id}
                 id={task.id}
-                deleteFun={props.deleteTask}
+                deleteFun={() => props.deleteTask(task.id, 'tasks')}
                 signInToTask={props.signToTask}
-                signOutToTask={props.signOutTask}
+                signOutTask={props.signOutTask}
                 whoIncluded={task.whoIncluded}
                 initials={
                   task.whoIncluded &&
@@ -68,7 +68,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteTask: (id) => dispatch(deleteTask(id)),
+    deleteTask: (id, collection) => dispatch(deleteTask(id, collection)),
     signToTask: (id) => dispatch(signToTask(id)),
     signOutTask: (id) => dispatch(signOutTask(id)),
   };

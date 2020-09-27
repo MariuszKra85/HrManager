@@ -3,12 +3,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  position: relative;
-  top: -8rem;
-  right: 1rem;
   margin: 5px;
   border-radius: 40px;
   text-shadow: 2px 2px 2px #434343;
+`;
+
+const StyledButtonWrapeer = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const TaskItem = ({
@@ -18,60 +20,74 @@ const TaskItem = ({
   id,
   deleteFun,
   signInToTask,
-  signOutToTask,
+  signOutTask,
+  taskDone,
   initials,
+  whoDone,
+  ifdone,
+  date,
 }) => {
   let key = 0;
   return (
-    <div key={id}>
+    <div key={id} className='card-panel '>
       <Link to={`/task/${id}`}>
-        <div className='card-panel '>
-          <h4>{title}</h4>
-          <div>{content}</div>
-          {initials &&
-            initials.map((e) => {
-              key++;
-              let item =
-                e &&
-                e.map((e) => {
-                  if (e != null) {
-                    return (
-                      <button
-                        className='btn btn-floating blue lighten-1'
-                        key={key}
-                      >
-                        {e}
-                      </button>
-                    );
-                  } else {
-                    return null;
-                  }
-                });
-              return item;
-            })}
-        </div>
+        <h4>{title}</h4>
+        <div>{content}</div>
+        {initials &&
+          initials.map((e) => {
+            key++;
+            let item =
+              e &&
+              e.map((e) => {
+                if (e != null) {
+                  return (
+                    <button
+                      className='btn btn-floating blue lighten-1'
+                      key={key}
+                    >
+                      {e}
+                    </button>
+                  );
+                } else {
+                  return null;
+                }
+              });
+            return item;
+          })}
+        {ifdone ? <div>Done Date: {date}</div> : null}
       </Link>
-      {role === 'admin' ? (
-        <StyledButton
-          className='right btn red lighten-2 wave waves-light'
-          onClick={() => deleteFun(id)}
-        >
-          delete Task
-        </StyledButton>
-      ) : (
-        <StyledButton
-          className='right btn red lighten-2 wave waves-light'
-          onClick={() => signOutToTask(id)}
-        >
-          SignOut Task
-        </StyledButton>
-      )}
-      <StyledButton
-        className='right btn green lighten-2 wave waves-light'
-        onClick={() => signInToTask(id)}
-      >
-        take Task
-      </StyledButton>
+      <StyledButtonWrapeer>
+        {role === 'admin' || ifdone ? (
+          <StyledButton
+            className=' btn red lighten-2 wave waves-light'
+            onClick={() => deleteFun(id)}
+          >
+            delete Task
+          </StyledButton>
+        ) : (
+          <StyledButton
+            className=' btn red lighten-2 wave waves-light'
+            onClick={() => signOutTask(id)}
+          >
+            SignOut Task
+          </StyledButton>
+        )}
+        {signInToTask ? (
+          <StyledButton
+            className=' btn green lighten-2 wave waves-light'
+            onClick={() => signInToTask(id)}
+          >
+            take Task
+          </StyledButton>
+        ) : (
+          <StyledButton
+            className=' btn green lighten-2 wave waves-light'
+            onClick={() => taskDone(id)}
+          >
+            Done !
+          </StyledButton>
+        )}
+      </StyledButtonWrapeer>
     </div>
   );
 };
