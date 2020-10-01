@@ -7,9 +7,12 @@ const adminCheck = (admin) => {
       <>
         <li>
           <NavLink to='/newUser'>New User</NavLink>
-        </li>{' '}
+        </li>
         <li>
           <NavLink to='/tasksDone'>Task Done</NavLink>
+        </li>
+        <li>
+          <NavLink to='/overviewUsers'>Users Overview</NavLink>
         </li>
       </>
     );

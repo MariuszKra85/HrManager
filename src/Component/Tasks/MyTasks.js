@@ -13,10 +13,7 @@ const MyTasks = (props) => {
       {myTasks &&
         myTasks.map((task) => {
           let arrTasks = task.whoIncluded.map((e) => {
-            console.log(e);
-            console.log(props.user);
             if (e === props.user) {
-              console.log('pasi');
               return (
                 <TaskItem
                   title={task.name}

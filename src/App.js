@@ -10,12 +10,14 @@ import CreateNewUser from './Component/Users/CreateNewUser';
 import UsersList from './Component/Users/UsersList';
 import MyTasks from './Component/Tasks/MyTasks';
 import TaskDone from './Component/Tasks/TaskDone';
+import OverviewUsers from './Component/OverViewUsers/OverviewUsers';
 function App() {
   return (
     <BrowserRouter>
       <div className='container'>
         <NavBar></NavBar>
         <Switch>
+          <Route path='/overviewUsers' component={OverviewUsers} />
           <Route path='/tasksDone' component={TaskDone} />
           <Route path='/myTasks' component={MyTasks} />
           <Route exact path='/' component={DashboardView} />
