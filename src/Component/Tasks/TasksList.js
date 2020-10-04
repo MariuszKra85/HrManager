@@ -7,6 +7,7 @@ import {
   deleteTask,
   signToTask,
   signOutTask,
+  taskDone,
 } from '../../Store/Action/TaskAction';
 const TasksList = (props) => {
   if (props.tasks) {
@@ -36,6 +37,7 @@ const TasksList = (props) => {
                 whoIncluded={task.whoIncluded}
                 signInToTask={arr.length === 0 ? props.signToTask : null}
                 signOutTask={props.signOutTask}
+                taskDone={props.taskDone}
                 ifdone={task.ifdone}
                 initials={
                   task.whoIncluded &&
@@ -76,6 +78,7 @@ const mapDispatchToProps = (dispatch) => {
     deleteTask: (id, collection) => dispatch(deleteTask(id, collection)),
     signToTask: (id) => dispatch(signToTask(id)),
     signOutTask: (id) => dispatch(signOutTask(id)),
+    taskDone: (id) => dispatch(taskDone(id)),
   };
 };
 
