@@ -94,7 +94,6 @@ export const signOutTask = (id) => {
 };
 export const taskDone = (id) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-    const firebase = getFirebase();
     const item = getState().firestore.data.tasks[id];
     const who = getState().firebase.auth.uid;
     const firestore = getFirestore();

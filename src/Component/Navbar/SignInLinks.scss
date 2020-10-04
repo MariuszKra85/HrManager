@@ -1,0 +1,17 @@
+.navLinks {
+  cursor: pointer;
+  .link {
+    transition: width 1s ease-in-out;
+    display: none;
+    width: 0px;
+  }
+  &:hover {
+    .link {
+      transition: width 1s ease-in-out;
+      display: flex;
+      width: auto;
+      flex-direction: column;
+      position: absolute;
+    }
+  }
+}

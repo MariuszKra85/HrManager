@@ -13,6 +13,7 @@ const TasksList = (props) => {
     const tasks = props.tasks;
     const users = props.users;
     const user = props.user;
+    const userId = props.userId;
 
     if (tasks.length === 0) {
       return <div> No Task for Today</div>;
@@ -22,6 +23,8 @@ const TasksList = (props) => {
       <div>
         {tasks &&
           tasks.map((task) => {
+            let arr =
+              task.whoIncluded && task.whoIncluded.filter((e) => e === userId);
             return (
               <TaskItem
                 role={user ? user.role : null}
@@ -30,9 +33,9 @@ const TasksList = (props) => {
                 key={task.id}
                 id={task.id}
                 deleteFun={() => props.deleteTask(task.id, 'tasks')}
-                signInToTask={props.signToTask}
-                signOutTask={props.signOutTask}
                 whoIncluded={task.whoIncluded}
+                signInToTask={arr.length === 0 ? props.signToTask : null}
+                signOutTask={props.signOutTask}
                 ifdone={task.ifdone}
                 initials={
                   task.whoIncluded &&
@@ -61,6 +64,7 @@ const TasksList = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    userId: state.firebase.auth.uid,
     user: state.firebase.profile,
     tasks: state.firestore.ordered.tasks,
     users: state.firestore.ordered.users,

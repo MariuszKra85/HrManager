@@ -72,7 +72,7 @@ const TaskItem = ({
             SignOut Task
           </StyledButton>
         )}
-        {signInToTask ? (
+        {signInToTask !== null ? (
           <StyledButton
             className=' btn green lighten-2 wave waves-light'
             onClick={() => signInToTask(id)}
@@ -80,7 +80,7 @@ const TaskItem = ({
             take Task
           </StyledButton>
         ) : null}
-        {!ifdone ? (
+        {!ifdone && signInToTask === null ? (
           <StyledButton
             className=' btn green lighten-2 wave waves-light'
             onClick={() => taskDone(id)}

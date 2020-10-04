@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import './SignInLinks.scss';
 
 const adminCheck = (admin) => {
   if (admin === 'admin') {
@@ -28,14 +29,19 @@ const SignLink = ({ profile, logOutFun }) => {
         <NavLink to='/dashboard'>Home</NavLink>
       </li>
       {adminCheck(profile.role)}
-      <li>
-        <NavLink to='/newTask'>New Task</NavLink>
-      </li>
-      <li>
-        <NavLink to='/tasks'>Tasks</NavLink>
-      </li>
-      <li>
-        <NavLink to='/myTasks'>My Tasks</NavLink>
+      <li className='navLinks'>
+        Tasks
+        <ul className='right  blue lighten-3 link'>
+          <li>
+            <NavLink to='/newTask'>New Task</NavLink>
+          </li>
+          <li>
+            <NavLink to='/tasks'>Tasks</NavLink>
+          </li>
+          <li>
+            <NavLink to='/myTasks'>My Tasks</NavLink>
+          </li>
+        </ul>
       </li>
 
       <li>
