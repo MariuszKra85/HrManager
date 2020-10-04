@@ -37,15 +37,10 @@ export const createUser = (newUser) => {
     const login = getState().firebase.auth.email;
     const pass = getState().firebase.profile.password;
 
-    console.log(login);
-    console.log(pass);
-
-    console.log('odpalamy create user');
     firebase
       .auth()
       .createUserWithEmailAndPassword(newUser.email, newUser.password)
       .then((res) => {
-        console.log('tworzymy kolekcje');
         return firestore
           .collection('users')
           .doc(res.user.uid)
@@ -57,8 +52,6 @@ export const createUser = (newUser) => {
             role: newUser.role,
           })
           .then(() => {
-            console.log(res);
-            console.log('tworzymy kolekcje dla admina');
             return firestore
               .collection('usersForAdmin')
               .doc(res.user.uid)

@@ -9,7 +9,6 @@ class CreateTask extends Component {
   };
 
   handleChange = (e) => {
-    console.log(e.id);
     this.setState({
       [e.target.id]: e.target.value,
     });
@@ -21,7 +20,6 @@ class CreateTask extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <form className='container row' onSubmit={this.handleSubmit}>
         <div className='input-field col s12 '>

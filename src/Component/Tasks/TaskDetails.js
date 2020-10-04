@@ -4,13 +4,19 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
 const TaskDetails = (props) => {
-  const { task } = props;
-  console.log(task);
+  const { task, taskDone } = props;
   if (task) {
     return (
       <div>
         <h3>{task.name}</h3>
         <p>{task.content}</p>
+      </div>
+    );
+  } else if (taskDone) {
+    return (
+      <div>
+        <h3>{taskDone.name}</h3>
+        <p>{taskDone.content}</p>
       </div>
     );
   } else {
@@ -20,14 +26,18 @@ const TaskDetails = (props) => {
 
 const mapStateToProps = (state, ownProps) => {
   const id = ownProps.match.params.id;
-  const tasks = state.firestore.data.tasks;
-  const task = tasks ? tasks[id] : null;
+  let task = state.firestore.data.tasks ? state.firestore.data.tasks[id] : null;
+  let tasksDone = state.firestore.data.taskdone
+    ? state.firestore.data.taskdone[id]
+    : null;
   return {
     task: task,
+    taskDone: tasksDone,
   };
 };
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([{ collection: 'tasks' }])
+  firestoreConnect([{ collection: 'tasks' }]),
+  firestoreConnect([{ collection: 'taskdone' }])
 )(TaskDetails);

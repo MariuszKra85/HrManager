@@ -6,8 +6,6 @@ import { deleteTask } from '../../Store/Action/TaskAction';
 import TaskItem from './TaskItem';
 
 const TaskDone = (props) => {
-  console.log(props);
-
   const TaskDone = () => {
     const item =
       props.tasksDone &&
@@ -31,7 +29,6 @@ const TaskDone = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     tasksDone: state.firestore.ordered.taskdone,
   };

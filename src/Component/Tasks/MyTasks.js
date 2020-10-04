@@ -7,7 +7,6 @@ import TaskItem from './TaskItem';
 
 const MyTasks = (props) => {
   const myTasks = props.tasks;
-  console.log(myTasks);
   return (
     <div>
       {myTasks &&

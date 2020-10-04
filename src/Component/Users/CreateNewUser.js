@@ -81,13 +81,13 @@ class CreateNewUser extends Component {
             Create User
           </button>
         </form>
-        <button
+        <Link
+          to={'/usersList'}
           className='left btn blue lighten-2 wave waves-light'
-          type='submit'
-          name='submit'
         >
-          <Link to={'/usersList'}> Show Users List</Link>
-        </button>
+          {' '}
+          Show Users List
+        </Link>
       </div>
     );
   }

@@ -23,8 +23,8 @@ const createUseList = (items) => {
             </StyledWrapper>
           );
         })}
-        <Link to={'/newUser'}>
-          <button className='btn blue lighten-1'>back</button>
+        <Link to={'/newUser'} className='btn blue lighten-1'>
+          Back
         </Link>
       </>
     );

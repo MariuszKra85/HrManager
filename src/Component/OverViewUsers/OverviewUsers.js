@@ -5,14 +5,11 @@ import { compose } from 'redux';
 import UserView from './UserView';
 
 const OverviewUsers = (props) => {
-  console.log(props);
-
   return (
     <div>
       {props.users &&
         props.users.map((user) => {
           let tasks = [];
-
           props.tasks &&
             props.tasks.filter((task) => {
               task.whoIncluded.forEach((e) => {
@@ -28,14 +25,17 @@ const OverviewUsers = (props) => {
                 return tasksDone.push(task);
               }
             });
-          let tasksTotal = props.tasks.length + props.tasksDone.length;
-          console.log(tasksTotal);
+          let tasksTotal =
+            props.tasks &&
+            props.tasksDone &&
+            props.tasks.length + props.tasksDone.length;
           return (
             <UserView
               name={user.name}
               task={tasks}
               tasksDone={tasksDone}
               tasksTotal={tasksTotal}
+              key={user.id}
             />
           );
         })}
