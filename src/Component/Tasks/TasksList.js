@@ -33,6 +33,7 @@ const TasksList = (props) => {
                 signInToTask={props.signToTask}
                 signOutTask={props.signOutTask}
                 whoIncluded={task.whoIncluded}
+                ifdone={task.ifdone}
                 initials={
                   task.whoIncluded &&
                   task.whoIncluded.map((taskID) => {

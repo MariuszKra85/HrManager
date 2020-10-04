@@ -79,14 +79,15 @@ const TaskItem = ({
           >
             take Task
           </StyledButton>
-        ) : (
+        ) : null}
+        {!ifdone ? (
           <StyledButton
             className=' btn green lighten-2 wave waves-light'
             onClick={() => taskDone(id)}
           >
             Done !
           </StyledButton>
-        )}
+        ) : null}
       </StyledButtonWrapeer>
     </div>
   );

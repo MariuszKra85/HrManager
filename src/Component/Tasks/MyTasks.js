@@ -21,6 +21,7 @@ const MyTasks = (props) => {
                   id={task.id}
                   signOutTask={props.signOutTask}
                   taskDone={props.taskDone}
+                  ifdone={task.ifdone}
                 />
               );
             } else return null;
