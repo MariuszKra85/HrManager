@@ -9,7 +9,7 @@ class NewEmployee extends Component {
     position: '',
   };
   render() {
-    return <div></div>;
+    return <div> tu tworzymy nowego pracownika</div>;
   }
 }
 
